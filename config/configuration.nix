@@ -228,13 +228,13 @@ in
   #  pinentryPackage = pkgs.pinentry-all;
   # };
 
-  home-manager = {
-    # also pass inputs to home-manager modules
-    # extraSpecialArgs = { inherit inputs; };
-    users = {
-      "toyhugs" = import ./home.nix;
-    };
-  };
+  # home-manager = {
+  #   # also pass inputs to home-manager modules
+  #   # extraSpecialArgs = { inherit inputs; };
+  #   users = {
+  #     "toyhugs" = import ./home.nix;
+  #   };
+  # };
 
   programs.nix-ld.enable = true; # Enable nix-ld
 
