@@ -5,7 +5,7 @@
   inputs = {
 
     # Nixpkgs stable, pour presque tout les paquets de mon système
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Nixpkgs unstable, pour certaines applications nécessitant des versions plus récentes
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
