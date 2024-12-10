@@ -5,7 +5,7 @@
   inputs = {
 
     # Nixpkgs stable, pour presque tout les paquets de mon système
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     # Nixpkgs unstable, pour certaines applications nécessitant des versions plus récentes
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -34,7 +34,7 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./config/configuration.nix
       ];
     };
     packages.x86_64-linux.hello = pkgs.hello;
