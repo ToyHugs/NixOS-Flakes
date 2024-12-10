@@ -4,20 +4,21 @@
 
 { config, pkgs, lib, inputs, ... }:
 
-let python =
-    let
-    packageOverrides = self:
-    super: {
-      opencv4 = super.opencv4.override {
-        enableGtk2 = true;
-        gtk2 = pkgs.gtk2;
-        # enableFfmpeg = true; #here is how to add ffmpeg and other compilation flags
-        # ffmpeg_3 = pkgs.ffmpeg-full;
-        };
-    };
-    in
-      pkgs.python3.override {inherit packageOverrides; self = python;};
-in
+# let python =
+#     let
+#     packageOverrides = self:
+#     super: {
+#       opencv4 = super.opencv4.override {
+#         enableGtk2 = true;
+#         gtk2 = pkgs.gtk2;
+#         enableUnfree = false;
+#         # enableFfmpeg = true; #here is how to add ffmpeg and other compilation flags
+#         # ffmpeg_3 = pkgs.ffmpeg-full;
+#         };
+#     };
+#     in
+#       pkgs.python3.override {inherit packageOverrides; self = python;};
+# in
 
 {
   imports =
@@ -355,12 +356,13 @@ in
     
     xclip # Clipboard manager
     # python3Full # For python in general and opencv
-    libevdev # For evdev
-    pkg-config # For evdev
-    linuxHeaders # For evdev
-    evdevremapkeys # For evdev
-    python312Packages.evdev python311Packages.evdev python311Packages.libevdev python312Packages.libevdev # For evdev
-    (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev]))
+    # libevdev # For evdev
+    # pkg-config # For evdev
+    # linuxHeaders # For evdev
+    # evdevremapkeys # For evdev
+    # python312Packages.evdev python311Packages.evdev python311Packages.libevdev python312Packages.libevdev # For evdev
+    python3Full # Just Python
+    # (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev])) 
     (import ./modules/nixos/toypass/toypass.nix { inherit pkgs; })
 
      
