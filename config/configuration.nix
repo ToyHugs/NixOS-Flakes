@@ -364,6 +364,7 @@
     python3Full # Just Python
     # (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev])) 
     (import ./modules/nixos/toypass/toypass.nix { inherit pkgs; })
+    nodejs_23
 
      
     # GNOME extensions for the desktop
