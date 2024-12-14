@@ -365,7 +365,8 @@
     # (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev])) 
     (import ./modules/nixos/toypass/toypass.nix { inherit pkgs; })
     nodejs_23
-
+    
+    mapscii
      
     # GNOME extensions for the desktop
     gnomeExtensions.blur-my-shell # Add blur effect to GNOME Shell
