@@ -39,7 +39,7 @@
     enable = true;
     efiSupport = true; # Enable EFI
     device = "nodev"; # "nodev" for efi
-    gfxmodeEfi = "1600x900";
+    gfxmodeEfi = "1920x1080";
 
     # theme = ./modules/nixos/grub-yorha-theme/theme.txt; # Not working
 
