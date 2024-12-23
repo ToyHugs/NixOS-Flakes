@@ -34,6 +34,9 @@
   system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = true;
 
+  # For NTFS
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Grub
   boot.loader.grub = {
     enable = true;
@@ -301,6 +304,10 @@
     # gdk-pixbuf-xlib # Hyneview test marche pas
     # gdk-pixbuf # Hyneview test
     nfs-utils # Repare usb drive
+
+    # App for signing in vscode
+    xdg-utils
+    pass
 
     platformio
 
