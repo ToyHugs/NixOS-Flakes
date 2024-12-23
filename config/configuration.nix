@@ -324,7 +324,7 @@
     spice-protocol
     win-virtio
     win-spice
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
 
     busybox # A lot of tools in one
     autopsy # Forensic tool
@@ -351,7 +351,7 @@
     # vpnc
     openconnect
     networkmanager-openconnect
-    gnome.networkmanager-openconnect
+    # gnome.networkmanager-openconnect
     # networkmanager-vpnc
     # gnome.networkmanager-vpnc
 
@@ -395,7 +395,7 @@
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour 
     epiphany # GNOME Web browser
-    gnome.geary # GNOME Mail client
+    geary # GNOME Mail client
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
