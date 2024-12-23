@@ -305,10 +305,6 @@
     # gdk-pixbuf # Hyneview test
     nfs-utils # Repare usb drive
 
-    # App for signing in vscode
-    xdg-utils
-    pass
-
     platformio
 
     dfu-util
