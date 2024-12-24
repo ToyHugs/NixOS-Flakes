@@ -36,11 +36,12 @@
     # Configuration de mon système
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs system; };
+      specialArgs = { inherit inputs self system; };
       modules = [
         ./config/configuration.nix
+        ./config/modules/nix-alien.nix
       ];
-      programs.nix-ld.enable = true;
+      
     };
     packages.x86_64-linux.hello = pkgs.hello;
     packages.x86_64-linux.default = pkgs.hello;
