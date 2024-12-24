@@ -84,7 +84,7 @@
 
   # Enable fingerprint reader support
   services.fprintd.enable = true;
-  service.fprintd.environment = {
+  services.fprintd.environment = {
     SYSTEMD_LOG_LEVEL = "debug";
   };
   # services.fprintd.tod.enable = true;
