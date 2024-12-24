@@ -82,6 +82,13 @@
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.guest.enable = true;
 
+  # Enable fingerprint reader support
+  services.fprintd.enable = true;
+  services.fprintd.tod.enable = true;
+
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090; # (If the vfs0090 Driver does not work, use the following driver)
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix; # (On my device it only worked with this driver)
+
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -271,6 +278,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+    fprintd # Fingerprint reader
+
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     grub2
     wget
