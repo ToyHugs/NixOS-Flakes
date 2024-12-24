@@ -279,8 +279,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-    fprintd # Fingerprint reader
-    # fprintd-tod # Fingerprint reader
+    # fprintd # Fingerprint reader
+    fprintd-tod # Fingerprint reader
 
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     grub2
