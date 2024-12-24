@@ -10,6 +10,9 @@
     # Nixpkgs unstable, pour certaines applications nécessitant des versions plus récentes
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Nix Alien, pour installer des paquets de gestion de paquets d'autres distributions
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
     # Home-manager, pour gérer la configuration de mon système, comme les thèmes, les raccourcis clavier, etc.
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -20,7 +23,7 @@
   };
 
   # Les sorties sont les dérivations que nous voulons construire
-  outputs = { self, nixpkgs, ... } @ inputs: 
+  outputs = { self, nixpkgs, nix-alien, ... } @ inputs: 
   let
 
     # Variable de raccourci
@@ -31,11 +34,13 @@
   {
 
     # Configuration de mon système
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs system; };
       modules = [
         ./config/configuration.nix
       ];
+      programs.nix-ld.enable = true;
     };
     packages.x86_64-linux.hello = pkgs.hello;
     packages.x86_64-linux.default = pkgs.hello;

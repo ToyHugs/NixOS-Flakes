@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, system, ... }:
 
 # let python =
 #     let
@@ -377,6 +377,11 @@
     gnomeExtensions.calc # Calculator
     gnomeExtensions.unmess # Assign applications to workspace    
   ];
+
+  # Add nix-alien to convert packages from other distributions
+  environment.systemPackages = with inputs.packages.${system}; [
+    nix-alien
+  ] ++ environment.systemPackages;
 
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="035b", MODE="0666"
