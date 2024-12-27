@@ -83,14 +83,19 @@
   virtualisation.virtualbox.guest.enable = true;
 
   # Enable fingerprint reader support
-  services.fprintd = {
-    enable = true;
-    package = pkgs.fprintd-tod;
-    tod = {
-      enable = true;
-      # driver = pkgs.libfprint-2-tod1-vfs0090;
-    };
-  };
+  # services.fprintd = {
+  #   enable = true;
+  #   # package = pkgs.fprintd-tod;
+  #   # tod = {
+  #   #   enable = true;
+  #   #   driver = pkgs.libfprint-2-tod1-elan;
+  #   # };
+  # };
+  # services.fwupd.enable = true;
+
+  # environment.variables = rec {
+  #   G_MESSAGES_DEBUG = "all";
+  # };
 
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090; # (If the vfs0090 Driver does not work, use the following driver)
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix; # (On my device it only worked with this driver)
@@ -126,6 +131,7 @@
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -258,7 +264,7 @@
   programs.appimage = { # Enable AppImage support
     enable = true;
     binfmt = true;
-};
+  };
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -285,8 +291,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-    # fprintd # Fingerprint reader
-    # fprintd-tod # Fingerprint reader
 
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     grub2
@@ -359,6 +363,8 @@
     # libsmi
     # opencv
 
+    # Jeu
+    prismlauncher # Minecraft
     
     # networkmanagerapplet
     # vpnc
