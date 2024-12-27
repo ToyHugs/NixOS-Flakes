@@ -355,6 +355,8 @@
     ant # AMIO
     cyberchef # On cook ici
     ghidra # Reverse engineering
+    cutter # Reverse engineering
+    iaito # Reverse engineering
     pdftk # Manipuler les pdf
     timelimit # Challenge Rootme
 
