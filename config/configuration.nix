@@ -390,6 +390,7 @@
     # evdevremapkeys # For evdev
     # python312Packages.evdev python311Packages.evdev python311Packages.libevdev python312Packages.libevdev # For evdev
     python3Full # Just Python
+    python39 # Care root me ne sait pas faire de bon challenge
     # (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev])) 
     (import ./modules/nixos/toypass/toypass.nix { inherit pkgs; })
     nodejs_23
