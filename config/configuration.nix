@@ -360,6 +360,8 @@
     pdftk # Manipuler les pdf
     timelimit # Challenge Rootme
 
+    apktool # Reverse engineering Android
+
     # OpenCV
     # ffmpeg_7-full
     # libsmi
