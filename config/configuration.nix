@@ -356,6 +356,7 @@
     cyberchef # On cook ici
     ghidra # Reverse engineering
     cutter # Reverse engineering
+    ida-free # Reverse engineering
     iaito # Reverse engineering
     pdftk # Manipuler les pdf
     timelimit # Challenge Rootme
