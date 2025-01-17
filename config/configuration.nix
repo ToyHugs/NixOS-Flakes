@@ -359,6 +359,7 @@
     ghidra # Reverse engineering
     cutter # Reverse engineering
     ida-free # Reverse engineering
+    gdb # Reverse engineering
     iaito # Reverse engineering
     pdftk # Manipuler les pdf
     timelimit # Challenge Rootme
@@ -385,6 +386,8 @@
     # Logiciel à installer / à tester
     # Installer NH https://github.com/viperML/nh - Pour facilement installer la configuration de NixOS
     # https://godbolt.org/ - Compiler du code C++ en ligne avec lien sur le code machine
+    nh
+    nhentai # Pour les culture générale de la culture japonaise ( ͡° ͜ʖ ͡°) (écrit par copilot)
 
     
     xclip # Clipboard manager
