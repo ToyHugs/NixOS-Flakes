@@ -363,6 +363,8 @@
     iaito # Reverse engineering
     pdftk # Manipuler les pdf
     timelimit # Challenge Rootme
+    jadx # Reverse engineering Java
+    bytecode-viewer # Reverse engineering Java
 
     apktool # Reverse engineering Android
 
