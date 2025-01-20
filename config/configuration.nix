@@ -286,6 +286,7 @@
     "qbittorrent-4.6.4"
   ];
 
+  programs.steam.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
