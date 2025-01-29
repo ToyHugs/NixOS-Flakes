@@ -381,6 +381,8 @@
 
     # Jeu
     prismlauncher # Minecraft
+
+    nrfutil # Nordic CHE
     
     # networkmanagerapplet
     # vpnc
@@ -423,11 +425,12 @@
 
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="2341", ATTR{idProduct}=="035b", MODE="0666"
-  '';
+'';
 
   services.udev.packages = with pkgs; 
   [ 
     platformio-core.udev
+    nrf-udev
   ];
 
 
@@ -452,8 +455,8 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 5000 ];
-  networking.firewall.allowedUDPPorts = [ 5000 ];
+  networking.firewall.allowedTCPPorts = [ 5050 ];
+  networking.firewall.allowedUDPPorts = [ 5050 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
