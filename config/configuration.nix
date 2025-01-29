@@ -335,6 +335,7 @@
     # gdk-pixbuf-xlib # Hyneview test marche pas
     # gdk-pixbuf # Hyneview test
     nfs-utils # Repare usb drive
+    wireshark
 
     platformio
 
