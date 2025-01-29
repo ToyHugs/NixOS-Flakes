@@ -271,6 +271,8 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.segger-jlink.acceptLicense = true;
+
 
   # Allow unsupported system
   # nixpkgs.config.allowUnsupportedSystem = true;
