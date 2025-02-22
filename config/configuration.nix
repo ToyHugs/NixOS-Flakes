@@ -356,9 +356,9 @@
 
     busybox # A lot of tools in one
     autopsy # Forensic tool
-    volatility3 # Forensic tool
 
     steam-run # Pour lancer n'importe quoi
+    modrinth-app # Minecraft
 
     wineWowPackages.stable
     # winetricks # Pour améliorer la compatibilité de Wine
@@ -374,6 +374,7 @@
     timelimit # Challenge Rootme
     jadx # Reverse engineering Java
     bytecode-viewer # Reverse engineering Java
+    hping # DDoS
 
     apktool # Reverse engineering Android
 
@@ -411,6 +412,7 @@
     # evdevremapkeys # For evdev
     # python312Packages.evdev python311Packages.evdev python311Packages.libevdev python312Packages.libevdev # For evdev
     python3Full # Just Python
+    python312Packages.pip # For pip
     python39 # Care root me ne sait pas faire de bon challenge
     # (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev])) 
     (import ./modules/nixos/toypass/toypass.nix { inherit pkgs; })
