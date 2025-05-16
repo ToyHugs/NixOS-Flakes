@@ -360,7 +360,7 @@
     autopsy # Forensic tool
 
     steam-run # Pour lancer n'importe quoi
-    modrinth-app # Minecraft
+    # modrinth-app # Minecraft
 
     wineWowPackages.stable
     # winetricks # Pour améliorer la compatibilité de Wine
