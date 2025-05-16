@@ -300,7 +300,7 @@
   environment.systemPackages = with pkgs; [
 
     godot_4
-
+    neovim
 
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     grub2
@@ -459,7 +459,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh.enable = false;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 5050 ];
