@@ -135,14 +135,19 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-   layout = "toy,fr";
-   variant = "";
-   options = "grp:win_space_toogle";
-   extraLayouts.toy = {
-    description = "ToyHugs";
-    languages   = [ "eng" ];
-    symbolsFile = ./modules/nixos/toy-key;
-   };
+    layout = "toy,qwerty-fr";
+    variant = "";
+    options = "grp:win_space_toogle";
+    extraLayouts.toy = {
+      description = "ToyHugs";
+      languages   = [ "eng" ];
+      symbolsFile = ./modules/nixos/toy-key;
+    };
+    extraVariants.qwerty-fr = {
+      description = "QWERTY FR";
+      languages   = [ "eng" ];
+      symbolsFile = ./modules/nixos/qwerty-fr-key;
+    };
   };
 
   # For VM tools
@@ -268,6 +273,18 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    ohMyZsh = { # "ohMyZsh" without Home Manager
+      enable = true;
+      plugins = [ "git" ];
+      theme = "essembeh";
+    };
+  };
+  users.defaultUserShell = pkgs.zsh;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -301,6 +318,9 @@
 
     godot_4
     neovim
+    wireguard-ui
+    wireguard-tools
+    qwerty-fr
 
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     grub2
