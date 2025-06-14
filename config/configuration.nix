@@ -143,7 +143,7 @@
       languages   = [ "eng" ];
       symbolsFile = ./modules/nixos/toy-key;
     };
-    extraVariants.qwerty-fr = {
+    extraLayouts.qwerty-fr = {
       description = "QWERTY FR";
       languages   = [ "eng" ];
       symbolsFile = ./modules/nixos/qwerty-fr-key;
