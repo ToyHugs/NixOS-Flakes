@@ -326,6 +326,10 @@
     grub2
     efibootmgr
 
+    typst
+    oxipng
+    typos
+
     wget
     vscode-fhs
     google-chrome
