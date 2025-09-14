@@ -1,39 +1,39 @@
 {
-  description = "A ToyHugs Flake";
+  description = "ToyHugs NixOS configuration with flakes";
 
-  # Les entrées sont les dépôts que nous voulons utiliser pour construire notre système
+  # Inputs are the dependencies of our flake
   inputs = {
 
-    # Nixpkgs stable, pour presque tout les paquets de mon système
+    # Nixpkgs stable : for the stable packages and NixOS configuration
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
-    # Nixpkgs unstable, pour certaines applications nécessitant des versions plus récentes
+    # Nixpkgs-unstable, for some applications requiring more recent versions
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Nix Alien, pour installer des paquets de gestion de paquets d'autres distributions
+  
+    # Nix Alien, for installing packages from other distributions
     nix-alien.url = "github:thiagokokada/nix-alien";
 
-    # Home-manager, pour gérer la configuration de mon système, comme les thèmes, les raccourcis clavier, etc.
+    # Home-manager, for managing my system configuration, such as themes, keyboard shortcuts, etc.
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs"; # Pour utiliser la même version de nixpkgs
-                                          # et éviter un conflit de version ou doublon
+      inputs.nixpkgs.follows = "nixpkgs"; # To use the same version of nixpkgs
+                                          # and avoid version conflicts or duplicates
     };
 
   };
 
-  # Les sorties sont les dérivations que nous voulons construire
+  # The outputs are the derivations we want to build  
   outputs = { self, nixpkgs, nix-alien, ... } @ inputs: 
   let
 
-    # Variable de raccourci
+    # Shortcut variable
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
 
   in 
   {
 
-    # Configuration de mon système
+    # To configure my system
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       specialArgs = { inherit inputs self system; };
@@ -43,8 +43,6 @@
       ];
       
     };
-    packages.x86_64-linux.hello = pkgs.hello;
-    packages.x86_64-linux.default = pkgs.hello;
 
   };
 }
