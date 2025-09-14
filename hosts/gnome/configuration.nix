@@ -441,7 +441,7 @@
     python312Packages.pip # For pip
     python39 # Care root me ne sait pas faire de bon challenge
     # (python.withPackages (ps: with ps; [ pyperclip numpy opencv4 evdev wheel libevdev])) 
-    (import ../../modules/nixos/toypass/toypass.nix { inherit pkgs; })
+    (import ../../modules/home-manager/toypass/toypass.nix { inherit pkgs; })
     nodejs_23
     
     mapscii
