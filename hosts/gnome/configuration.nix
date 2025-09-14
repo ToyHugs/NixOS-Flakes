@@ -141,12 +141,12 @@
     extraLayouts.qwerty-fr = {
       description = "QWERTY FR";
       languages   = [ "eng" ];
-      symbolsFile = ../../modules/nixos/qwerty-fr-key;
+      symbolsFile = ../../modules/nixos/keyboard-layout/qwerty-fr-key;
     };
     extraLayouts.toy = {
       description = "ToyHugs";
       languages   = [ "eng" ];
-      symbolsFile = ../../modules/nixos/toy-key;
+      symbolsFile = ../../modules/nixos/keyboard-layout/toy-key;
     };
   };
 
