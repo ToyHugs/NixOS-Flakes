@@ -5,14 +5,31 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Bootloader configuration
+  boot.loader = {
+
+    systemd-boot.enable = true; # Disable to use GRUB
+    efi.canTouchEfiVariables = true;
+
+    # GRUB as boot loader.
+    grub = {
+      enable = false;
+      efiSupport = true;
+    };
+  };
+
+  # Auto Upgrade NixOS
+  system.autoUpgrade = {
+    enable = true;
+    # allowReboot = false;
+    flake = "path:${rootPath}";
+    flags = [ "--update-input" "nixpkgs" "-L" ];
+    randomizedDelaySec = "45min";
+  };
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -37,11 +54,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -103,8 +118,8 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-
-  system.stateVersion = "24.11"; # Never modify this value after installation! Get from `nixos-generate-config`
+  system.stateVersion =
+    "24.11"; # Never modify this value after installation! Get from `nixos-generate-config`
 
 }
 
