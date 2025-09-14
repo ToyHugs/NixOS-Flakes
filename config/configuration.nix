@@ -135,18 +135,18 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "toy,qwerty-fr";
+    layout = "qwerty-fr,toy";
     variant = "";
     options = "grp:win_space_toogle";
-    extraLayouts.toy = {
-      description = "ToyHugs";
-      languages   = [ "eng" ];
-      symbolsFile = ./modules/nixos/toy-key;
-    };
     extraLayouts.qwerty-fr = {
       description = "QWERTY FR";
       languages   = [ "eng" ];
       symbolsFile = ./modules/nixos/qwerty-fr-key;
+    };
+    extraLayouts.toy = {
+      description = "ToyHugs";
+      languages   = [ "eng" ];
+      symbolsFile = ./modules/nixos/toy-key;
     };
   };
 
