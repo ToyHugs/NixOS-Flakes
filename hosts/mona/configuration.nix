@@ -2,23 +2,27 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader configuration
   boot.loader = {
 
-    systemd-boot.enable = true; # Disable to use GRUB
+    systemd-boot.enable = false; # Disable to use GRUB
     efi.canTouchEfiVariables = true;
 
     # GRUB as boot loader.
     grub = {
-      enable = false;
+      enable = true;
       efiSupport = true;
+      device = "nodev";
+      #gfxmodeEfi = "auto";
     };
   };
 
@@ -26,7 +30,7 @@
   system.autoUpgrade = {
     enable = true;
     # allowReboot = false;
-    flake = "path:${rootPath}";
+    flake = inputs.self.outPath;
     flags = [ "--update-input" "nixpkgs" "-L" ];
     randomizedDelaySec = "45min";
   };

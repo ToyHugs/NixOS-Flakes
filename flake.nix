@@ -73,7 +73,7 @@
           modules = [
             ./hosts/mona/configuration.nix
           ];
-        }
+        };
 
       };
     };
