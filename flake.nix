@@ -26,7 +26,7 @@
 
   # The outputs are the derivations we want to build  
 
-  outputs = inputs@{ self, nixpkgs-24-11, nixpkgs-unstable, nix-alien, ... }:
+  outputs = inputs@{ self, nixpkgs-24-11, nixpkgs-unstable, nix-alien, nixpkgs-25-05, ... }:
     let
       # A function to create a NixOS system configuration for a given host
       mkHost =
@@ -38,7 +38,8 @@
             # Default configuration for all hosts
             ({ ... }: {
               nixpkgs.hostPlatform = system;
-              # nixpkgs.config.allowUnfree = true;
+              nix.settings.experimental-features = [ "nix-command" "flakes" ];
+              nixpkgs.config.allowUnfree = true;
               # nixpkgs.overlays = [ ];
             })
           ];
@@ -69,7 +70,7 @@
         # };
 
         mona = mkHost {
-          nixpkgs = nixpkgs-24-11;
+          nixpkgs = nixpkgs-25-05;
           modules = [
             ./hosts/mona/configuration.nix
           ];

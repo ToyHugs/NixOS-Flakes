@@ -1,15 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, inputs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader configuration
   boot.loader = {
@@ -26,48 +20,29 @@
     };
   };
 
-  # Auto Upgrade NixOS
-  system.autoUpgrade = {
-    enable = true;
-    # allowReboot = false;
-    flake = inputs.self.outPath;
-    flags = [ "--update-input" "nixpkgs" "-L" ];
-    randomizedDelaySec = "45min";
+  # Networking configuration
+  networking = {
+    hostName = "mona";
+    networkmanager.enable = true;
+    # wireless.enable = true; # Enables wireless support via wpa_supplicant.
   };
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # Localisation and internationalisation settings.
+  time.timeZone = "Europe/Paris";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_NUMERIC = "fr_FR.UTF-8"; # For number formatting (e.g., 1 234,56)
+      LC_TIME = "fr_FR.UTF-8"; # For time formatting (e.g., 12:34:56)
+    };
+  };
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  # Windows Manager and Desktop Environment configuration
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  # services.wa
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
@@ -81,13 +56,14 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
+  users.users.toyhugs = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
+    ];
+    hashedPassword = "$7$CU..../....e5Y/VWPEmPW7neU9QZVQ1.$9LGG9i0yxhmkLeYM.EJ/KdM0QrmO3.iD.gAf9mUzTr3"; 
+  };
 
   # programs.firefox.enable = true;
 
