@@ -34,12 +34,12 @@
   {
 
     # To configure my system
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+    nixosConfigurations.default = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       specialArgs = { inherit inputs self system; };
       modules = [
-        ./config/configuration.nix
-        ./config/modules/nix-alien.nix
+        ./hosts/default/configuration.nix
+        ./modules/nix-alien.nix
       ];
       
     };
