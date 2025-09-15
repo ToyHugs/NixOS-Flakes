@@ -1,82 +1,41 @@
 {
-  description = "ToyHugs NixOS configuration with flakes";
+  description =
+    "Modular NixOS flake with Home Manager, multi-host & multi-user profile composition";
 
-  # Inputs are the dependencies of our flake
   inputs = {
+    nixpkgs-24-11.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Nixpkgs stable : for the stable packages and NixOS configuration
-    nixpkgs-24-11.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-25-05.url = "github:nixos/nixpkgs/nixos-25.05";
-
-    # Nixpkgs-unstable, for some applications requiring more recent versions
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Nix Alien, for installing packages from other distributions
-    nix-alien.url = "github:thiagokokada/nix-alien";
-
-    # Home-manager, for managing my system configuration, such as themes, keyboard shortcuts, etc.
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows =
-        "nixpkgs-24-11"; # To use the same version of nixpkgs
-      # and avoid version conflicts or duplicates
-    };
-
+    home-manager.url = "github:nix-community/home-manager";
+    # Keep HM locked to 24.11 inputs to avoid an extra lock; HM will still use the host pkgs via useGlobalPkgs
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-24-11";
   };
 
-  # The outputs are the derivations we want to build  
-
-  outputs = inputs@{ self, nixpkgs-24-11, nixpkgs-unstable, nix-alien, nixpkgs-25-05, ... }:
-    let
-      # A function to create a NixOS system configuration for a given host
-      mkHost =
-        { nixpkgs, system ? "x86_64-linux", modules, extraSpecialArgs ? { } }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs self system; } // extraSpecialArgs;
-          modules = modules ++ [
-            # Default configuration for all hosts
-            ({ ... }: {
-              nixpkgs.hostPlatform = system;
-              nix.settings.experimental-features = [ "nix-command" "flakes" ];
-              nixpkgs.config.allowUnfree = true;
-              # nixpkgs.overlays = [ ];
-            })
-          ];
-        };
+  outputs = inputs@{ self, nixpkgs-24-11, nixpkgs-unstable, home-manager, ... }:
+    let mkHost = import ./lib/mkHost.nix { inherit inputs self home-manager; };
     in {
-      # Define the NixOS configurations for each host
       nixosConfigurations = {
-        # Host GNOME, pinned on 24.11 stable
+        # Desktop host pinned to 24.11
         gnome = mkHost {
           nixpkgs = nixpkgs-24-11;
-          modules = [
-            ./hosts/gnome/configuration.nix
-
-            # If you want to use nix-alien, and it exposes a flake module :
-            # nix-alien.nixosModules.default
-            ./modules/nix-alien.nix
-          ];
-          # Expose an unstable set of packages if you want to use some from there occasionally
+          system = "x86_64-linux";
+          hostName = "gnome";
           extraSpecialArgs = {
+            # Optional: expose an unstable set to profiles/HM if needed
             pkgsUnstable = import nixpkgs-unstable { system = "x86_64-linux"; };
           };
         };
 
-        # Another example host
-        # server = mkHost {
-        #   nixpkgs = nixpkgs-24-11;
-        #   modules = [ ./hosts/server/configuration.nix ];
-        # };
-
-        mona = mkHost {
-          nixpkgs = nixpkgs-25-05;
-          modules = [
-            ./hosts/mona/configuration.nix
-          ];
+        # Server host pinned to unstable
+        tests = mkHost {
+          nixpkgs = nixpkgs-24-11;
+          system = "x86_64-linux";
+          hostName = "tests";
+          extraSpecialArgs = {
+            # Optional: expose an unstable set to profiles/HM if needed
+            pkgsUnstable = import nixpkgs-unstable { system = "x86_64-linux"; };
+          };
         };
-
       };
     };
-
 }
